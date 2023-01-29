@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/size8"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="@dimen/size8"
+    app:cardElevation="@dimen/size8">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/size16">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvName"
+            android:layout_width="@dimen/size_zero"
+            android:layout_height="wrap_content"
+            tools:text="Leanne Grahan"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/MediumLabel.Bold" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgViewPhone"
+            android:layout_width="@dimen/size24"
+            android:layout_height="@dimen/size24"
+            android:layout_marginTop="@dimen/size4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvName"
+            app:srcCompat="@android:drawable/stat_sys_phone_call"
+            app:tint="@color/green" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPhone"
+            android:layout_width="@dimen/size_zero"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size4"
+            android:layout_marginStart="@dimen/size8"
+            tools:text="1-770-736-8031 x56442"
+            style="@style/MediumLabel"
+            app:layout_constraintTop_toBottomOf="@+id/tvName"
+            app:layout_constraintStart_toEndOf="@+id/imgViewPhone"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgViewEmail"
+            android:layout_width="@dimen/size24"
+            android:layout_height="@dimen/size24"
+            android:layout_marginTop="@dimen/size4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPhone"
+            app:srcCompat="@android:drawable/ic_dialog_email"
+            app:tint="@color/green" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvEmail"
+            android:layout_width="@dimen/size_zero"
+            android:layout_marginTop="@dimen/size4"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size8"
+            tools:text="Sincere@april.biz"
+            style="@style/MediumLabel"
+            app:layout_constraintTop_toBottomOf="@+id/tvPhone"
+            app:layout_constraintStart_toEndOf="@+id/imgViewEmail"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnViewPosts"
+            style="@style/ButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/view_posts"
+            app:layout_constraintTop_toBottomOf="@+id/tvEmail"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
