@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.admission.testceiba.core.constants.ApplicationConstants
 import com.admission.testceiba.databinding.ActivityPostsBinding
 import com.admission.testceiba.domain.model.PostDom
+import com.admission.testceiba.ui.users.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,31 +26,36 @@ class ActivityPosts : AppCompatActivity() {
     }
 
     private fun setupView() {
-        initObservers()
+        initSubscriptionsViewModel()
         prepareView()
     }
 
     private fun prepareView() {
-        val userId:Int? = intent.extras?.getInt("USER_ID")
+        val userId:Int? = intent.extras?.getInt(ApplicationConstants.KEY_USER_ID_SELECTED)
         userId?.let {
             postViewModel.findUser(userId)
             postViewModel.getPosts(userId)
         }
     }
 
-    private fun initObservers() {
-        postViewModel.selectedUser.observe(this, Observer { userSelected->
-            with(binding) {
-                tvName.text = userSelected.name
-                tvPhone.text = userSelected.phone
-                tvEmail.text = userSelected.email
+    private fun initSubscriptionsViewModel() {
+        postViewModel.singleLiveEvent.observe(this) { itEvent ->
+            when (itEvent) {
+                is PostViewModel.ViewEvent.ResponseIsLoading -> {
+                    binding.progress.isVisible  = true
+                }
+                is PostViewModel.ViewEvent.ResponseIsSuccess -> {
+                    binding.progress.isVisible  = false
+                    setupRecyclerViewItems(itEvent.posts)
+                }
+                is PostViewModel.ViewEvent.ResponseFindUser -> {
+                    with(binding) {
+                        tvName.text = itEvent.user.name
+                        tvPhone.text = itEvent.user.phone
+                        tvEmail.text = itEvent.user.email
+                    }
+                }
             }
-        })
-        postViewModel.posts.observe(this, Observer {
-                posts-> setupRecyclerViewItems(posts)
-        })
-        postViewModel.isLoading.observe(this) {
-            binding.progress.isVisible = it
         }
     }
 
