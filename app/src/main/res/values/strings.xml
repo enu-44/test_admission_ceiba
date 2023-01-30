@@ -4,5 +4,7 @@
     <string name="no_search_results_found">Lista esta vacia</string>
     <string name="search_user">Buscar usuario</string>
     <string name="view_posts">Ver publicaciones</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

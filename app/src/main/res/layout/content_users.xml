@@ -15,6 +15,9 @@
         android:layout_margin="@dimen/size8"
         android:hint="@string/search_user"
         android:textColorHint="@color/green"
+        app:hintTextColor="@color/green"
+        app:boxStrokeColor="@color/green"
+        app:expandedHintEnabled="false"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -22,8 +25,7 @@
             android:id="@+id/edtSearchUser"
             android:paddingStart="0dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:backgroundTint="@color/white" />
+            android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewUsers"
@@ -34,16 +36,27 @@
         tools:visibility="visible"
         tools:listitem="@layout/item_user"
         app:layout_constraintTop_toBottomOf="@+id/layoutSearchUser"
-        app:layout_constraintStart_toEndOf="parent"/>
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
     <TextView
         android:id="@+id/tvNotFoundResults"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/MediumLabel"
         android:text="@string/no_search_results_found"
-        android:textAppearance="?attr/textAppearanceHeadline4"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@id/recyclerViewUsers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/recyclerViewUsers" />
+    <ProgressBar
+        android:id="@+id/progress"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+    </ProgressBar>
 </androidx.constraintlayout.widget.ConstraintLayout>

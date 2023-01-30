@@ -10,7 +10,6 @@
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent">
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -27,14 +26,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/size20"
+            android:text="@string/title_test_admission"
             style="@style/MediumLabel.BoldToolbar"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:text="@string/title_test_admission" />
+            app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.appcompat.widget.Toolbar>
-
-
-
 </com.google.android.material.appbar.AppBarLayout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/size8"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="@dimen/size8"
+    app:cardElevation="@dimen/size8"
+    android:id="@+id/cardViewUser">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/size16">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="@dimen/size_zero"
+            android:layout_height="wrap_content"
+            tools:text="sunt aut facere repellat provident occaecati excepturi optio reprehenderit"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:scrollHorizontally="true"
+            style="@style/MediumLabel.Bold" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBody"
+            style="@style/MediumLabel"
+            android:layout_width="@dimen/size_zero"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size8"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:scrollHorizontally="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+            tools:text="quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
