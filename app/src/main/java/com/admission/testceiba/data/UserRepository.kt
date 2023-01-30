@@ -25,6 +25,6 @@ class UserRepository @Inject constructor(
     override suspend fun saveLocalUsers(users:List<UserDom>) =
         userLocalDataSource.saveAll(users.map { it.toEntity() })
 
-    override suspend fun getLocalUsersByName(query: String):List<UserDom> =
+    override suspend fun searchLocalUsersByName(query: String):List<UserDom> =
         userLocalDataSource.findAllUsersByName(query).map { it.toDom() }
 }

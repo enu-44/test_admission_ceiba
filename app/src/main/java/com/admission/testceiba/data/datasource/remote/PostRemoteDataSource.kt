@@ -11,12 +11,8 @@ import javax.inject.Inject
 class PostRemoteDataSource @Inject constructor(private val api: ApiClient)  {
     suspend fun getPostsByUserId(userId:Int): List<PostDto> {
         return withContext(Dispatchers.IO){
-            try {
-                val response: Response<List<PostDto>> = api.getAllPostsByUserId(userId)
-                response.body()?: emptyList()
-            }catch (e:Exception){
-                emptyList()
-            }
+            val response: Response<List<PostDto>> = api.getAllPostsByUserId(userId)
+            response.body()?: emptyList()
         }
     }
 }

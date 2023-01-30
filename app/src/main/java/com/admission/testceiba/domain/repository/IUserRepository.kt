@@ -7,5 +7,5 @@ interface IUserRepository {
     suspend fun getLocalUsers(): List<UserDom>
     suspend fun getLocalUserById(userId:Int): UserDom
     suspend fun saveLocalUsers(users:List<UserDom>)
-    suspend fun getLocalUsersByName(query:String): List<UserDom>
+    suspend fun searchLocalUsersByName(query:String): List<UserDom>
 }

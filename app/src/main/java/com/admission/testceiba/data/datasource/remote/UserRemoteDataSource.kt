@@ -12,12 +12,8 @@ import javax.inject.Inject
 class UserRemoteDataSource @Inject constructor(private val api:ApiClient)  {
      suspend fun getUsers(): List<UserDto> {
         return withContext(Dispatchers.IO){
-            try {
-                val response: Response<List<UserDto>> = api.getAllUsers()
-                response.body()?: emptyList()
-            }catch (e: Exception){
-                emptyList()
-            }
+            val response: Response<List<UserDto>> = api.getAllUsers()
+            response.body()?: emptyList()
         }
      }
 }

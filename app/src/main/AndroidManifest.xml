@@ -17,7 +17,7 @@
         android:theme="@style/Theme.AdmissionTestCeiba"
         tools:targetApi="31">
         <activity
-            android:name=".ui.posts.ActivityPosts"
+            android:name=".ui.posts.PostsActivity"
             android:exported="false" />
         <activity
             android:name=".ui.users.MainActivity"

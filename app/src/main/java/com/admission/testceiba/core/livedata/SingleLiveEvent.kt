@@ -1,4 +1,4 @@
-package com.admission.testceiba.core
+package com.admission.testceiba.core.livedata
 
 import android.util.Log
 import androidx.annotation.MainThread

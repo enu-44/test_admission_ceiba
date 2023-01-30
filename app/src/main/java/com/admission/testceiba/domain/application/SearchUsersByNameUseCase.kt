@@ -4,9 +4,9 @@ import com.admission.testceiba.domain.model.UserDom
 import com.admission.testceiba.domain.repository.IUserRepository
 import javax.inject.Inject
 
-class GetUsersByNameUseCase @Inject constructor(
+class SearchUsersByNameUseCase @Inject constructor(
     private val userRepository: IUserRepository
 ) {
     suspend operator fun invoke(query:String ): List<UserDom> =
-        userRepository.getLocalUsersByName(query)
+        userRepository.searchLocalUsersByName(query)
 }

@@ -13,7 +13,7 @@ import com.admission.testceiba.ui.users.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ActivityPosts : AppCompatActivity() {
+class PostsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPostsBinding
     private val postViewModel: PostViewModel by viewModels()

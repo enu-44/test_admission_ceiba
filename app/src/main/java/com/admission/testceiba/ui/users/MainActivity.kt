@@ -7,10 +7,10 @@ import android.text.TextWatcher
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
+import com.admission.testceiba.core.constants.ApplicationConstants
 import com.admission.testceiba.databinding.ActivityMainBinding
 import com.admission.testceiba.domain.model.UserDom
-import com.admission.testceiba.ui.posts.ActivityPosts
+import com.admission.testceiba.ui.posts.PostsActivity
 import dagger.hilt.android.AndroidEntryPoint
 
  @AndroidEntryPoint
@@ -27,19 +27,28 @@ import dagger.hilt.android.AndroidEntryPoint
     }
 
      private fun setupView() {
-         initObservers()
+         initSubscriptionsViewModel()
          initInputListeners()
          prepareView()
      }
 
-     private fun initObservers() {
-         userViewModel.users.observe(this, Observer {
-                 listUsers->
-             binding.includeUsers.tvNotFoundResults.isVisible = listUsers.isEmpty()
-             setupRecyclerViewItems(listUsers)
-         })
-         userViewModel.isLoading.observe(this) {
-             binding.includeUsers.progress.isVisible = it
+     private fun initSubscriptionsViewModel() {
+         userViewModel.singleLiveEvent.observe(this) { itEvent ->
+             when (itEvent) {
+                 is UserViewModel.ViewEvent.ResponseIsLoading -> {
+                     binding.includeUsers.progress.isVisible = true
+                 }
+                 is UserViewModel.ViewEvent.ResponseIsEmpty -> {
+                     binding.includeUsers.progress.isVisible = false
+                     binding.includeUsers.tvNotFoundResults.isVisible = true
+                     setupRecyclerViewItems(emptyList())
+                 }
+                 is UserViewModel.ViewEvent.ResponseIsSuccess -> {
+                     binding.includeUsers.progress.isVisible = false
+                     binding.includeUsers.tvNotFoundResults.isVisible = false
+                     setupRecyclerViewItems(itEvent.users)
+                 }
+             }
          }
      }
 
@@ -66,8 +75,8 @@ import dagger.hilt.android.AndroidEntryPoint
      }
 
      private fun viewPosts(userDom: UserDom) {
-         val intent = Intent(this, ActivityPosts::class.java)
-         intent.putExtra("USER_ID", userDom.id)
+         val intent = Intent(this, PostsActivity::class.java)
+         intent.putExtra(ApplicationConstants.KEY_USER_ID_SELECTED, userDom.id)
          startActivity(intent)
      }
 }

@@ -1,9 +1,9 @@
 package com.admission.testceiba.ui.users
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.admission.testceiba.domain.application.GetUsersByNameUseCase
+import com.admission.testceiba.core.livedata.SingleLiveEvent
+import com.admission.testceiba.domain.application.SearchUsersByNameUseCase
 import com.admission.testceiba.domain.application.GetUsersUseCase
 import com.admission.testceiba.domain.model.UserDom
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,28 +13,41 @@ import javax.inject.Inject
 @HiltViewModel
 class UserViewModel @Inject constructor(
     private val getUsersUseCase: GetUsersUseCase,
-    private val getUsersByNameUseCase: GetUsersByNameUseCase
+    private val searchUsersByNameUseCase: SearchUsersByNameUseCase
 ):ViewModel() {
-    val isLoading= MutableLiveData<Boolean>()
-    val users = MutableLiveData<List<UserDom>>()
+    var singleLiveEvent: SingleLiveEvent<ViewEvent> = SingleLiveEvent()
+    sealed class ViewEvent {
+        class  ResponseIsSuccess(val users: List<UserDom>): ViewEvent()
+        object ResponseIsEmpty: ViewEvent()
+        object ResponseIsLoading: ViewEvent()
+    }
     fun getUsers() {
         viewModelScope.launch {
-            isLoading.postValue(true)
-            val result:List<UserDom> = getUsersUseCase()
-            onResult(result)
+            singleLiveEvent.value = ViewEvent.ResponseIsLoading
+            try {
+                onResultEvent(getUsersUseCase())
+            }catch (ex:Throwable){
+                onResultEvent(emptyList())
+            }
         }
     }
 
     fun onFilterUsers(query:String) {
         viewModelScope.launch {
-            isLoading.postValue(true)
-            val result:List<UserDom> = getUsersByNameUseCase(query)
-            onResult(result)
+            singleLiveEvent.value = ViewEvent.ResponseIsLoading
+            try {
+                onResultEvent(searchUsersByNameUseCase(query))
+            }catch (ex:Throwable){
+                onResultEvent(emptyList())
+            }
         }
     }
 
-    fun onResult(result:List<UserDom>){
-        users.postValue(result)
-        isLoading.postValue(false)
+    private fun onResultEvent(result:List<UserDom>){
+        if(result.isNotEmpty()){
+            singleLiveEvent.value = ViewEvent.ResponseIsSuccess(result)
+        }else{
+            singleLiveEvent.value = ViewEvent.ResponseIsEmpty
+        }
     }
 }

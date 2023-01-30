@@ -18,9 +18,8 @@ internal class SearchUsersByNameUseCaseTest{
     private lateinit var userRepository: IUserRepository
 
     lateinit var searchUsersByNameUseCase:SearchUsersByNameUseCase
-
-    val users = listOf(UserDom(id = 1, name = "Enuar", phone = "123456789", email = "enu.developer@gmail.com"))
-
+    private val usersFake = listOf(UserDom(id = 1, name = "Enuar", phone = "123456789", email = "enu.developer@gmail.com"))
+    private val query = "Enuar"
 
     @Before
     fun onBefore(){
@@ -29,16 +28,16 @@ internal class SearchUsersByNameUseCaseTest{
     }
 
     @Test
-    fun `when the database doesnt return anything then get values from api and save local database`() = runBlocking {
+    fun `when search value is "Enuar", the database return data`() = runBlocking {
         //Given
-        coEvery { userRepository.getLocalUsers() } returns emptyList()
-        coEvery { userRepository.getRemoteUsers() } returns users
+        coEvery { userRepository.searchLocalUsersByName(query) } returns usersFake
+        coEvery { userRepository.getRemoteUsers() } returns usersFake
 
         //When
-        getUsersUseCase()
+        val response = searchUsersByNameUseCase(query)
 
         //Then
-        coVerify(exactly = 1) { userRepository.getRemoteUsers() }
-        coVerify(exactly = 1) { userRepository.saveLocalUsers(users) }
+        coVerify(exactly = 1) { userRepository.searchLocalUsersByName(query) }
+        assert(response == usersFake)
     }
 }

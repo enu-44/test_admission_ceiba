@@ -10,7 +10,7 @@ class PostRepository @Inject constructor(
     private val postRemoteDataSource:PostRemoteDataSource
 ) :IPostRepository {
 
-    override suspend fun getPostsByUserId(userId:Int): List<PostDom> =
+    override suspend fun getRemotePostsByUserId(userId:Int): List<PostDom> =
         postRemoteDataSource
             .getPostsByUserId(userId)
             .map { it.toDom() }

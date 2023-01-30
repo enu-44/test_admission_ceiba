@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".ui.posts.ActivityPosts">
+    tools:context=".ui.posts.PostsActivity">
     <include
         layout="@layout/toolbar_base"
         android:id="@+id/include_toolbar" />

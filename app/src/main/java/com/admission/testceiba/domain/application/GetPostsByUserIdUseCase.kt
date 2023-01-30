@@ -8,5 +8,5 @@ class GetPostsByUserIdUseCase @Inject constructor(
     private val postRepository: IPostRepository
 ) {
     suspend operator fun invoke(userId:Int ): List<PostDom> =
-        postRepository.getPostsByUserId(userId)
+        postRepository.getRemotePostsByUserId(userId)
 }
