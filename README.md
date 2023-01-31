@@ -14,3 +14,5 @@ Los usuarios y publicaciones se obtienen de unos web services tipo Rest.
 - [Persistencia de datos con ROOM]() - Persistencia de datos con ROOM
 
 - [Testing en Android con MVVM (Unit test - junit)]() - Testing en Android con MVVM (Unit test - junit)
+- [Testing en Android con MVVM (functional testing - expresso)]() - Testing en Android con MVVM (functional testing - expresso)
+
